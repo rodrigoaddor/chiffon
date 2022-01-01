@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "dev.rodrick.chiffon.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "PlayerDropMixin"
+  ]
+}
