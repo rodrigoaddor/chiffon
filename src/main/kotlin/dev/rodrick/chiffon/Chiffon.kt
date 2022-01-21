@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher
 import dev.rodrick.chiffon.commands.FindCommand
 import dev.rodrick.chiffon.commands.MarkerCommand
 import dev.rodrick.chiffon.events.Reap
+import dev.rodrick.chiffon.events.SeedBag
 import dev.rodrick.chiffon.events.TorchTicker
 import dev.rodrick.chiffon.utils.Logger
 import net.fabricmc.api.ModInitializer
@@ -21,6 +22,7 @@ object Chiffon : ModInitializer {
         })
 
         UseBlockCallback.EVENT.register(Reap)
+        UseBlockCallback.EVENT.register(SeedBag)
 
         TorchTicker.register()
 
