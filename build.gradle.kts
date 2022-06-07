@@ -13,7 +13,6 @@ val modVersion: String by project
 version = modVersion
 val mavenGroup: String by project
 group = mavenGroup
-minecraft {}
 
 repositories {
     mavenCentral()

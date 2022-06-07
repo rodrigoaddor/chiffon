@@ -2,7 +2,6 @@ package dev.rodrick.chiffon.events
 
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.block.CropBlock
-import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Items
@@ -12,7 +11,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.tag.BlockTags
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.TranslatableTextContent
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
@@ -33,12 +32,7 @@ object Reap : UseBlockCallback {
 
         // TODO: "reaper" tag
         val hoes = arrayOf(
-            Items.WOODEN_HOE,
-            Items.STONE_HOE,
-            Items.IRON_HOE,
-            Items.GOLDEN_HOE,
-            Items.DIAMOND_HOE,
-            Items.NETHERITE_HOE
+            Items.WOODEN_HOE, Items.STONE_HOE, Items.IRON_HOE, Items.GOLDEN_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE
         )
 
         if (heldItem.item in hoes && state.isIn(crops) && (block as CropBlock).isMature(state)) {
@@ -51,15 +45,16 @@ object Reap : UseBlockCallback {
 
                 val items = state.getDroppedStacks(lootContext).map {
                     // TODO: use tag
-                    if ((it.name as TranslatableText).key.contains("seed")) {
+                    if ((it.name.content as TranslatableTextContent).key.contains("seed")) {
                         it.count -= 1
                     }
+
                     ItemEntity(world, pos.x + .5, pos.y + .0, pos.z.toDouble() + .5, it)
                 }
 
                 items.forEach { world.spawnEntity(it) }
 
-                heldItem.damage(1, player ) {
+                heldItem.damage(1, player) {
                     world.playSound(null, it.blockPos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0f, 1.0f)
                 }
 

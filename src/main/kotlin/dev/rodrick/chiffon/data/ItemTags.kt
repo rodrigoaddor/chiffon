@@ -1,10 +1,11 @@
 package dev.rodrick.chiffon.data
 
-import net.fabricmc.fabric.api.tag.TagFactory
+import dev.rodrick.chiffon.ModInfo
 import net.minecraft.block.Block
-import net.minecraft.tag.Tag
+import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 
 class ItemTags {
-    val REAPERS: Tag<Block> = TagFactory.BLOCK.create(Identifier("chifron", "reapers"))
+    val REAPERS: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, Identifier(ModInfo.MODID, "reaper_tools"))
 }
